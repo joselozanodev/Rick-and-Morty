@@ -1,0 +1,26 @@
+.nav-searchbar{
+    background-color: #fff2;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+}
+
+.about{
+    text-decoration: none;
+    color: black;
+}
+
+.about:hover{
+    font-size: 1.1rem;
+}
+
+.home{
+    text-decoration: none;
+    color: black;
+}
+
+.home:hover{
+    font-size: 1.1rem;
+}
+

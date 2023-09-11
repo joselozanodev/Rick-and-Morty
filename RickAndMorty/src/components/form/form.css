@@ -1,0 +1,20 @@
+label{
+    color: #fff;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input{
+    width: 200px;
+    align-self: center;
+}
+
+#submit{
+    width: 70px;
+    align-self: center;
+    margin-top: 10px;
+}
