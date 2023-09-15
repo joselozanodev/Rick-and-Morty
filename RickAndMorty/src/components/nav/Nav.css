@@ -6,21 +6,12 @@
     padding: 2px;
 }
 
-.about{
+.links{
     text-decoration: none;
     color: black;
 }
 
-.about:hover{
+.links:hover{
     font-size: 1.1rem;
+    color: blanchedalmond;
 }
-
-.home{
-    text-decoration: none;
-    color: black;
-}
-
-.home:hover{
-    font-size: 1.1rem;
-}
-

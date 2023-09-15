@@ -14,9 +14,8 @@ export default function Cards({ characters, onClose }) {
           ({ id, name, status, species, gender, origin, image }, index) => {
             return (
               
-                <div className="col-md-4">
+                <div className="col-md-4" key={index}>
                     <Card
-                      key={index}
                       id={id}
                       name={name}
                       status={status}

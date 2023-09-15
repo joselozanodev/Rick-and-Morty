@@ -9,11 +9,14 @@ export default function Nav({ onSearch }) {
   return (
     <nav className="nav-searchbar">
       <SearchBar onSearch={onSearch} />
-      <NavLink to={"/about"} className="about">
+      <NavLink to={"/about"} className="links">
         About
       </NavLink>
-      <NavLink to={"/home"} className="home">
+      <NavLink to={"/home"} className="links">
         Home
+      </NavLink>
+      <NavLink to={"/favorites"} className="links">
+        Favorites
       </NavLink>
     </nav>
   );

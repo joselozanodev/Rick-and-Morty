@@ -1,8 +1,8 @@
-# **💪 HW10 | React Forms - Integration**
+# **💪 HW13 | React Hooks - Integration**
 
 ## **🕒 DURACIÓN ESTIMADA**
 
-3 horas
+2 horas
 
 <br />
 
@@ -16,7 +16,11 @@
 
 ## **📝 INTRODUCCIÓN**
 
-En esta homework crearemos un sistema de login para nuestra aplicación. De esta forma podremos practicar formularios y, además, cada vez que ingresemos a la App tendremos que tener un email y una contraseña.
+En esta homework crearemos dos cosas que harán más completa nuestra aplicación 😄.
+
+-  Haremos un **filtrado** para nuestros personajes favoritos. Vamos a filtrar todos los personajes según su género: **`Male`**, **`Female`**, **`Genderless`** y **`unknown`**.
+
+-  Por otro lado haremos un **ordenamiento** para nuestros personajes favoritos. Vamos a ordenar todos los personajes por su **id** (de mayor a menor y viceversa).
 
 <br />
 
@@ -24,137 +28,100 @@ En esta homework crearemos un sistema de login para nuestra aplicación. De esta
 
 ## **📋 INSTRUCCIONES**
 
-### **👩‍💻 EJERCICIO 1 | Form**
+### **👩‍💻 EJERCICIO 1 | Actions**
 
-Ahora crearemos el formulario que nos permitirá logearnos en un futuro.
+Dirígete al archivo **`actions`** y crea las siguientes funciones:
 
-1. Crea un componente con el nombre **`Form`**.
-2. Dentro de este componente se deben renderizar los siguientes elementos:
+1. **`filterCards`**: esta función recibe por parámetro un **gender**. Debe retornar una action con el **type** igual a "**FILTER**" y el payload será igual al parámetro recibido.
 
-   -  Una etiqueta **`form`** que envolverá a todo el componente.
-   -  Una etiqueta **`label`** junto con un **`input`** para el email.
-   -  Una etiqueta **`label`** junto con un **`input`** para la password.
-   -  Un **`button`** con el texto "**_Submit_**".
-
-¡Dale algo de estilos al componente! Puede quedar algo como esto...
-
-<img src="./img/form.png" alt="" />
+2. **`orderCards`**: esta función recibe por parámetro un **orden** (será: **A**: ascendente o **D**: descendente). Debe retornar una action con el **type** igual a "**ORDER**" y el payload será igual al parámetro recibido.
 
 <br />
 
 ---
 
-### **👩‍💻 EJERCICIO 2 | Routing**
+### **👩‍💻 EJERCICIO 2 | Reducer**
 
-Ahora le diremos a nuestro formulario dónde debe renderizarse. Para esto:
+Dirígete al archivo **`reducer`** y sigue estos pasos:
 
-1. Crea una ruta en el archivo **`App.js`** y crea una ruta para que el formulario se renderice en **`/`**.
-2. Si obervas la imagen del ejercicio anterior, la barra de navegación aún se muestra en el **login**. Deberás crear un renderizado condicional, de modo tal que la **`Nav`** se muestre siempre y cuando no estemos en la ruta **`/`**.
+1. En tu estado inicial crea una nueva propiedad llamada **allCharacters** que debe ser igual a un arreglo vacío.
 
-> **PISTA:** investiga sobre el hook **`useLocation`** de react-router-dom, y piensa cómo hacer el renderizado condicional.
+2. Modificaremos el caso **ADD_FAV** de la siguiente manera:
 
-<br />
+   -  Dentro de la copia de tu estado global, reemplaza la propiedad **myFavorites** por **allCharacters**.
+   -  Cuando retornes tu estado, agrega la propiedad **`allCharacters`** que también sea igual a la copia en la que agregaste el nuevo personaje.
 
----
+   </br >
 
-### **👩‍💻 EJERCICIO 3 | Form control**
+3. Crea un nuevo caso con el nombre "**FILTER**". Aquí debes crear una copia de tu estado global **allCharacters**. A partir de esta copia filtra todos aquellos personajes que tengan el mismo género que recibes por payload. Finalmente retorna una copia de tu estado, pero que la propiedad **myFavorites** sea igual a este filtrado.
 
-En este ejercicio controlaremos y gestionaremos la información que ingrese el usuario en nuestro formulario. Para esto:
+4. Crea un nuevo caso con el nombre "**ORDER**". Aquí vamos a ordenar nuestros personajes favoritos de forma ascendente y descendente. Para esto:
 
-1. Crea un estado local llamado **userData**. Este debe inicializarse como un objeto con las propiedades **email** y **password** iguales a un string vacío.
-2. Conecta tu estado local con los inputs correspondientes utilizando la propiedad **`value`**.
-3. Crea una función llamada **handleChange** que nos permita reflejar el texto ingresado de los inputs en nuestro estado local.
+   -  Crea una copia de tu estado global **allCharacters**.
+   -  Utiliza el método **`sort`** para ordenar tus personajes de acuerdo a su **id**.
+   -  Si el payload es igual a "**A**", los personajes deben ordenarse de menor a mayor.
+   -  Si el payload es igual a "**D**, los personajes deben ordenarse de mayor a menor.
+   -  Finalmente retorna tu estado global y en la propiedad **myFavorites** guarda el ordenamiento que hiciste.
 
-<br />
-
----
-
-### **👩‍💻 EJERCICIO 4 | Validaciones**
-
-1. En tu componente **`Form`** crea un nuevo estado local llamado "**errors**" que se inicialice como un objeto vacío. Este es el estado que utilizarás para encontrar errores en el formulario.
-
-2. Ahora crea un archivo con el nombre "**validation.js**". Aquí dentro deberás crear una función que valide los siguientes puntos:
-
-**EMAIL**
-
--  el nombre de usuario tiene que ser un email (¡Explora validaciónes REGEX en internet!).
--  el nombre de usuario no puede estar vacío.
--  el nombre de usuario no puede tener más de 35 caracteres.
-
-**PASSWORD**
-
--  la contraseña tiene que tener al menos un número.
--  la contraseña tiene que tener una longitud entre 6 y 10 caracteres.
-
-¡No te olvides de renderizar y darle estilos a tus errores! Te dejamos un ejemplo de cómo puede quedar.
-
-<img src="./img/validations.png" alt="" >
+> [**NOTA**]: investiga en la web cómo funciona el método **`sort`**.
 
 <br />
 
 ---
 
-### **👩‍💻 EJERCICIO 5 | Seguridad**
+### **👩‍💻 EJERCICIO 3 | Filtro & Ordenamiento**
 
-Ahora simularemos una base de datos donde esté guardado un email y password. De esta forma, solo si la información de usuario coincide podrá ingresar a la aplicación. Para esto:
+Dirígete a tu componente **`Favorites`**. Dentro de él deberás:
 
-1. En el archivo **`App.js`** crea lo siguiente:
+1. Crea una etiqueta **`select`**. Dentro de este selector:
 
-   -  Un estado local llamado "**access**" que se inicialice en **`false`**.
-   -  Una variable llamada "**EMAIL**", y que sea igual a tu email.
-   -  Una variable "**PASSWORD**", y que sea igual a una contraseña.
+   -  Crea una etiqueta **`option`** con el atributo **value** igual a **"A"** (ascendente).
+   -  Crea una etiqueta **`option`** con el atributo **value** igual a **"D"** (descendente).
 
-</br >
+   ```html
+   <option value="Ascendente">Ascendente</option>
+   ```
 
-2. Crea una función llamada "**login**" que reciba por parámetro "_userData_". Esta función tiene que preguntar si el email y password que declaraste más arriba son iguales a los que les está llegando por parámetro. En caso afirmativo, el estado local access ahora será **`true`**. Importa el hook "**useNavigate**" de _react-router-dom_ y haremos que nos redirija a **`/home`** si la información es correcta.
+2. Crea una segunda etiqueta **`select`**. Dentro de este selector deberás:
 
-```jsx
-const navigate = useNavigate();
-const [access, setAccess] = useState(false);
-const EMAIL = 'ejemplo@gmail.com';
-const PASSWORD = 'unaPassword';
+   -  Crear 4 etiquetas **`option`**. Cada una con su atributo **value** igual a los siguientes valores: **Male**, **Female**, **Genderless** y **unknown**.
 
-function login(userData) {
-   if (userData.password === PASSWORD && userData.email === EMAIL) {
-      setAccess(true);
-      navigate('/home');
-   }
-}
-```
+   ```html
+   <option value="Male">Male</option>
+   ```
 
-3. Por último, lleva el siguiente código a tu componente (no te olvides de importar el **`useEffect`**).
+> [**NOTA**]: ten en cuenta que la propiedad **`unknown`** debe escribirse en minúsculas, ya que esa el la forma como proviene de la API.
 
-```javascript
-// App.js
-useEffect(() => {
-   !access && navigate('/');
-}, [access]);
-```
+3. Importa las actions que creaste en esta homework y el hook **`useDispatch`**.
+
+4. Crea una función llamada **handleOrder**. En su interior solo debe despachar la action **`orderCards`** pasándole como argumento **`e.target.value`**.
+
+5. Crea una función llamada **handleFilter**. En su interior solo debe despachar la action **`filterCards`** pasándole como argumento **`e.target.value`**.
+
+6. Agrega el atributo **`onChange`** a las etiquetas **`select`** pasándoles las funciones correspondientes a cada una.
 
 <br />
 
 ---
 
-### **👩‍💻 EJERCICIO 6 | Login**
+<br />
 
-¡Ahora le daremos la funcionalidad de cambiar los permisos a nuestro login!
+### **👩‍💻 EJERCICIO 4 | Forzado de render**
 
-1. Dirígete al archivo **`App.js`** y pásale la función **login** que creaste en el ejercicio anterior al componente **`Form`** mediante props.
+Ahora solo nos queda, en el componente **`Favorites`** crear un estado local que se llama **aux** e inicialo en **`false`**.
 
-2. En el componente **`Form`** crea una función "**handleSubmit**". Esta función recibe un evento por parámetro. Deberás ejecutas la función **`e.preventDefault()`**. Luego ejecuta la función "**login**" recibida por props. ¡No te olvides de pasarle por parámetro tu estado local _`userData`_!
+Una vez creado, dentro del **handleOrder** setea este estado en su valor opuesto.
 
-3. La función **handleSubmit** debe ejecutarse cuando se hace click en el botón **submit**.
+<br />
 
-¡Listo! Ya tienes un login funcional 😀🥳🤓
+A esta altura, tu filtro y ordenamiento debería estar funcionando de la siguiente manera:
 
-Pruebalo ingresando la información que declaraste previamente.
+<img src="./img/example.gif" alt="" />
 
 <br />
 
 ---
 
-### **📌 EJERCICIO EXTRA**
+## **📌 Extra Credit**
 
-Te desafiamos a que crees un botón "**Log out**" en tu componente **`Nav`**. Si lo presionas debe quitar los permisos de acceso y redirigirte automáticamente a tu componente **`Form`**.
-
-> [**NOTA**]: lo puedes hacer creando una función **logout** en tu archivo App.js.
+Agrega una opción adicional en el select del filtro para que muestre todos los personajes. Desarrolla la lógica para que ello ocurra.
