@@ -43,7 +43,7 @@ export const Form = ({login}) => {
         onChange={handleChange}
       />
       {
-        errors.email?<p style={{color:"red"}}>{errors.email}</p>:null
+        errors.email?<p style={{color:"red"}}>{errors.email}</p> :null
       }
       <label>Password:</label>
       <input
@@ -55,7 +55,7 @@ export const Form = ({login}) => {
         onChange={handleChange}
       />
       {
-         errors.password?<p style={{color:"red"}}>{errors.password}</p>:null
+         errors.password?<p style={{color:"red"}}>{errors.password}</p> :null
       }
       <button
         type="submit"

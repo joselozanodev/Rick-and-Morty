@@ -37,6 +37,11 @@ export default function App() {
     }
   }
 
+  function logout(){
+    setAccess(false)
+    navigate("/")
+  }
+
   useEffect(() => {
     !access && navigate("/");
   }, [access]);
@@ -64,15 +69,24 @@ export default function App() {
     setCharacters(filteredCharacter);
   };
 
+  const charactersWithFavorites = characters.map((character) => {
+    const isFavorite = favorites.some((favorite) => favorite.id === character.id);
+  
+    return {
+      ...character,
+      isFavorite,
+    };
+  });
+
   return (
     <div className="App">
-      {location.pathname !== "/" ? <Nav onSearch={onSearch} /> : null}
+      {location.pathname !== "/" ? <Nav onSearch={onSearch} logout={logout}/> : null}
 
       <Routes>
         <Route path="/" element={<Form login={login} />} />
         <Route
           path="/home"
-          element={<Cards characters={characters} onClose={onClose} />}
+          element={<Cards characters={charactersWithFavorites} onClose={onClose} />}
         />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />

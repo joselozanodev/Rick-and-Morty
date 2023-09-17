@@ -21,7 +21,7 @@ function Card({
   onClose,
   removeFav,
   addFav,
-  myFavorites
+  allCharacters
 }) {
   
   const [isFav, setIsFav] = useState(false);
@@ -37,12 +37,12 @@ function Card({
   };
 
   useEffect(() => {
-    myFavorites.forEach((fav) => {
+    allCharacters.forEach((fav) => {
        if (fav.id === id) {
           setIsFav(true);
        }
     });
- }, [myFavorites]);
+ }, [allCharacters]);
  
 
   return (
@@ -56,7 +56,7 @@ function Card({
             <button onClick={handleFavorite}>🤍</button>
           }
           <CloseButton
-            onClick={() => onClose(id)}
+            onClick={() => {onClose(id); removeFav(id)}}
             className="btn-close btn-close"
           />
           <Link to={`/detail/${id}`}>
@@ -86,7 +86,7 @@ const mapDispatchToProps= (dispatch)=>{
 
 const mapStateToProps = (state)=>{
     return{
-      myFavorites: state.myFavorites
+      allCharacters: state.allCharacters
     }
 }
 

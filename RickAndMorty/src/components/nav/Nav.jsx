@@ -5,10 +5,10 @@ import SearchBar from "./SearchBar";
 import styles from "./Nav.css";
 import { Link, NavLink } from "react-router-dom";
 
-export default function Nav({ onSearch }) {
+export default function Nav({ onSearch, logout }) {
   return (
     <nav className="nav-searchbar">
-      <SearchBar onSearch={onSearch} />
+      <SearchBar onSearch={onSearch} logout={logout}/>
       <NavLink to={"/about"} className="links">
         About
       </NavLink>

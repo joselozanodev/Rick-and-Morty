@@ -8,6 +8,8 @@ export const FILTER= "FILTER"
 
 export const ORDER = "ORDER"
 
+export const ALL_CARDS = "ALL_CARDS"
+
 export const addFav = (character) => {
   return {
     type: ADD_FAV,
@@ -36,3 +38,4 @@ export const orderCards = (order)=>{
     payload: order
   }
 }
+

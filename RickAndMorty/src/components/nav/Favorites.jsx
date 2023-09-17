@@ -8,9 +8,13 @@ import { filterCards, orderCards } from '../../redux/actions'
 import { useState } from 'react'
 
 function Favorites() {
+  const allFavs = useSelector(state => state.allCharacters)
+
   const favorites = useSelector(state=> state.myFavorites)
 
   const [aux, setAux] = useState(false)
+
+  const [currentfilter, setCurrentFilter] = useState('ALL')
 
   const dispatch = useDispatch()
 
@@ -20,7 +24,16 @@ function Favorites() {
   }
 
   const handleFilter = ({target})=>{
-    dispatch(filterCards(target.value))
+    const value = target.value
+
+
+    if(value === 'ALL'){
+      setAux(false)
+    }else{
+      dispatch(filterCards(target.value))
+      setAux(true)
+    }
+
   }
 
   return (
@@ -32,6 +45,7 @@ function Favorites() {
         </select>
 
         <select style={{height:"50px"}} onChange={handleFilter}>
+          <option value="ALL">All characters</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Genderless">Genderless</option>
@@ -39,7 +53,21 @@ function Favorites() {
         </select>
 
       {
-        favorites.map(({id, name, status, species, gender, origin, image, onClose})=>{
+        aux
+        ?favorites.map(({id, name, status, species, gender, origin, image})=>{
+          return(
+          <Card 
+          id={id}
+          key={id}
+          name={name}
+          status={status}
+          species={species}
+          gender={gender}
+          origin={origin.name}
+          image={image}
+          />)
+        })
+        :allFavs.map(({id, name, status, species, gender, origin, image})=>{
           return(
           <Card 
           id={id}

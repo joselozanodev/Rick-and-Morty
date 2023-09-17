@@ -11,7 +11,7 @@ export default function Cards({ characters, onClose }) {
       <div className="container ">
       <div className="row " >
         {characters.map(
-          ({ id, name, status, species, gender, origin, image }, index) => {
+          ({ id, name, status, species, gender, origin, image}, index) => {
             return (
               
                 <div className="col-md-4" key={index}>
@@ -24,6 +24,7 @@ export default function Cards({ characters, onClose }) {
                       origin={origin.name}
                       image={image}
                       onClose={onClose}
+
                     />
                   </div>
                

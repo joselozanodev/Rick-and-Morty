@@ -24,6 +24,9 @@ const reducer = (state = initialState, { type, payload }) => {
         myFavorites: state.myFavorites.filter(
           (char) => char.id !== Number(payload)
         ),
+        allCharacters: state.allCharacters.filter(
+          (char) => char.id !== Number(payload)
+        ),
       };
 
     case FILTER:
@@ -31,18 +34,19 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         myFavorites: state.allCharacters.filter(
           (char) => char.gender === payload
-        ),
+        )
       };
 
     case ORDER:
-      const allFavCopy = [...state.allCharacters];
+      const favCopy = [...state.myFavorites];
+      const orderedFavorites =
+        payload === "A"
+          ? favCopy.sort((a, b) => a.id - b.id)
+          : favCopy.sort((a, b) => b.id - a.id);
 
       return {
         ...state,
-        myFavorites:
-          payload === "A"
-            ? allFavCopy.sort((a, b) => a.id - b.id)
-            : allFavCopy.sort((a, b) => b.id - a.id),
+        myFavorites: orderedFavorites,
       };
 
     default:
