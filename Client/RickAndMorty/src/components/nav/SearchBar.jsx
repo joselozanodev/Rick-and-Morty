@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import styles from "./searchBar.css";
+
 
 export default function SearchBar({ onSearch, logout }) {
   const [id, setId] = useState("");
@@ -13,29 +13,29 @@ export default function SearchBar({ onSearch, logout }) {
   };
 
   return (
-    <div className="container-search">
+    <div className="h-[100%]">
       <input
         onChange={handleChange}
         type="search"
         value={id}
-        id="input-search"
+        className="h-[100%] rounded-[1px] focus:outline-slate-700"
       />
       <button
         onClick={() => {
           onSearch(id);
           setId("");
         }}
-        id="btn-search"
+        className="text-slate-200 pl-[10px] h-[100%] w-[100px] hover:bg-slate-700 active:bg-slate-600"
       >
         Agregar
       </button>
       <button
         onClick={()=>randomChar()}
+        className="text-slate-200 pl-[10px]  h-[100%] w-[200px] hover:bg-slate-700 active:bg-slate-600"
       >
         Random character
       </button>
 
-      <button onClick={logout}>LogOut</button>
     </div>
   );
 }

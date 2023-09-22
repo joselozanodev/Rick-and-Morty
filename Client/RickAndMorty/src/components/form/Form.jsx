@@ -5,6 +5,7 @@ import styles from "./form.css";
 import { useState } from "react";
 import { validation } from "./validation";
 
+
 export const Form = ({login}) => {
   const [userData, setUserData] = useState({
     email: "",
@@ -34,7 +35,8 @@ export const Form = ({login}) => {
   return (
     <div className=" bg-gradient-to-b from-slate-500 to-slate-700 h-[100vh] flex justify-center items-center">
     <form onSubmit={handleSubmit} className="bg-slate-200 h-[500px] w-[27%] rounded-[10px] shadow-2xl flex flex-col justify-center text-center">
-      <label className="text-slate-900 font-poppins py-[10px]">Email</label>
+      <img src={"https://www.freepnglogos.com/uploads/rick-and-morty-png/rick-and-morty-portal-shoes-white-clothing-zavvi-23.png"} className="h-[250px] w-[250px] self-center" />
+      <label className="text-slate-900 font-poppins pb-[10px] text-lg">Email</label>
       <input
         id="email"
         type="email"
@@ -42,12 +44,12 @@ export const Form = ({login}) => {
         placeholder="Type your email..."
         value={userData.email}
         onChange={handleChange}
-        className="w-[75%] mx-auto"
+        className="w-[75%] mx-auto rounded-[2px] border-[1px] border-slate-500 focus:outline-slate-600 focus:shadow-md"
       />
       {
         errors.email?<p style={{color:"red"}}>{errors.email}</p> :null
       }
-      <label className="text-slate-900 font-poppins py-[10px]">Password</label>
+      <label className="text-slate-900 font-poppins py-[10px] text-lg">Password</label>
       <input
         type="password"
         id="password"
@@ -55,7 +57,7 @@ export const Form = ({login}) => {
         placeholder="Type your password..."
         value={userData.password}
         onChange={handleChange}
-        className="w-[75%] mx-auto"
+        className="w-[75%] mx-auto rounded-[2px] border-[1px] border-slate-500 focus:outline-slate-600 focus:shadow-md"
       />
       {
          errors.password?<p style={{color:"red"}}>{errors.password}</p> :null
@@ -63,7 +65,7 @@ export const Form = ({login}) => {
       <button
         type="submit"
         id="submit"
-        className="text-slate-900 font-poppins bg-slate-500 h-[30px] w-[40%] "
+        className="text-slate-200 font-poppins bg-slate-700 h-[30px] w-[60%] rounded-[8px] self-center mt-[30px] hover:bg-slate-600 active:bg-slate-700"
         >
         Submit
       </button>

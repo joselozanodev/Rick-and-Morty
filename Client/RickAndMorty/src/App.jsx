@@ -47,7 +47,7 @@ export default function App() {
   }, [access]);
 
   const onSearch = (id) => {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
       ({ data }) => {
         if (data.name) {
           if (!characters.some((character) => character.id === data.id)) {
@@ -83,7 +83,7 @@ export default function App() {
       {location.pathname !== "/" ? <Nav onSearch={onSearch} logout={logout}/> : null}
 
       <Routes>
-        <Route path="/" element={<Form login={login} />} />
+        <Route path="/" element={<Form login={login}/>} />
         <Route
           path="/home"
           element={<Cards characters={charactersWithFavorites} onClose={onClose} />}

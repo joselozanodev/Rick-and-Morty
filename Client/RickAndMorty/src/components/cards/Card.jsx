@@ -4,7 +4,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import CloseButton from "react-bootstrap/CloseButton";
 import styles from "./card.css";
 import { Link } from "react-router-dom";
 import { addFav, removeFav } from "../../redux/actions";
@@ -47,28 +46,23 @@ function Card({
 
   return (
     <>
-      <div className="card border border-1">
-        <div className="card-body p-0">
+    <div className="w-[100%] h-[100%]">
           {
           isFav ?
-            <button onClick={handleFavorite}>❤️</button>
+            <button onClick={handleFavorite} className="float-left relative z-10 mt-[5px] hover:scale-110">❤️</button>
           :
-            <button onClick={handleFavorite}>🤍</button>
+            <button onClick={handleFavorite} className="float-left relative z-10 mt-[5px] hover:scale-110">🤍</button>
           }
-          <CloseButton
+          <button
             onClick={() => {onClose(id); removeFav(id)}}
-            className="btn-close btn-close"
-          />
-          <Link to={`/detail/${id}`}>
-            <h2 className="card-name">{name}</h2>
+            className=" float-right relative right-[8px] top-[3px] text-[20px] text-slate-200 hover:scale-110"
+          >X</button>
+            <h2 className="inline relative top-[125px] left-[150px] font-bold text-[30px] text-slate-300 overflow-hidden text-ellipsis" >{name}</h2>
+          <Link to={`/detail/${id}`} className="relative">
+            <button className="relative float-right top-[240px] right-[40px] bg-slate-500 w-[150px] h-[40px] rounded-[5px] font-semibold text-slate-200 hover:border-[3px] hover:border-slate-200 hover:bg-slate-800">Details</button>
           </Link>
-          <h4 className="card-text text-start">{status}</h4>
-          <h4 className="card-text text-start">{species}</h4>
-          <h4 className="card-text text-start">{gender}</h4>
-          <h4 className="card-text text-start">{origin}</h4>
-          <img src={image} className="charImage w-100" />
-        </div>
-      </div>
+          <img src={image} className="h-[100%] mt-[-36px] relative right-[22px] rounded-l-[9px]" />
+          </div>
     </>
   );
 }

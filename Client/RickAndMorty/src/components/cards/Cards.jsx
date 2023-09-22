@@ -8,13 +8,11 @@ import Card from "./Card";
 export default function Cards({ characters, onClose }) {
   return (
     <>
-      <div className="container ">
-      <div className="row " >
         {characters.map(
           ({ id, name, status, species, gender, origin, image}, index) => {
             return (
               
-                <div className="col-md-4" key={index}>
+                <div className=" bg-gradient-to-r from-slate-800 to-gray-700 my-[70px] flex w-[70%] mx-auto justify-between rounded-[9px] shadow-2xl " key={index}>
                     <Card
                       id={id}
                       name={name}
@@ -27,12 +25,10 @@ export default function Cards({ characters, onClose }) {
 
                     />
                   </div>
-               
             );
           }
         )}
-        </div>  
-      </div>
+
     </>
   );
 }

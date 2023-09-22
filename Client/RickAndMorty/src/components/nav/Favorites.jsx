@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 import { useSelector } from 'react-redux'
 import Card from '../cards/Card'
-import styles from './Favorites.css'
 import { useDispatch } from 'react-redux'
 import { filterCards, orderCards } from '../../redux/actions'
 import { useState } from 'react'
