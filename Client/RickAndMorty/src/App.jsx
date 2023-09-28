@@ -15,6 +15,8 @@ import { Form } from "./components/form/Form";
 import Favorites from "./components/nav/Favorites";
 import { useSelector } from "react-redux";
 
+const URL = "http://localhost:3001/rickandmorty/login";
+
 export default function App() {
   const [characters, setCharacters] = useState([]);
 
@@ -24,42 +26,46 @@ export default function App() {
 
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
-  const EMAIL = "joselozano.dev@gmail.com";
-  const PASSWORD = "jose123";
 
+  async function login(userData) {
+    try {
+      const { email, password } = userData;
+      const { data } = await axios(URL + `?email=${email}&password=${password}`)
 
+      const { access } = data;
+      setAccess(access);
+      access && navigate("/home");
 
-
-  function login(userData) {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
-      setAccess(true);
-      navigate("/home");
+    } catch (error) {
+      console.log(error.message);
     }
   }
 
-  function logout(){
-    setAccess(false)
-    navigate("/")
+  function logout() {
+    setAccess(false);
+    navigate("/");
   }
 
   useEffect(() => {
     !access && navigate("/");
   }, [access]);
 
-  const onSearch = (id) => {
-    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
-      ({ data }) => {
-        if (data.name) {
-          if (!characters.some((character) => character.id === data.id)) {
-            setCharacters((oldChars) => [...oldChars, data]);
-          } else {
-            window.alert("¡Este personaje ya ha sido agregado!");
-          }
-        } else {
-          window.alert("¡No hay personajes con este ID!");
+  const onSearch = async (id) => {
+    const repeatedCharacter = characters.filter(char => char.id === Number(id))
+    try {
+      const { data } = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+      if (data.name){
+        if(!repeatedCharacter.length){
+          setCharacters((oldChars)=>[...oldChars, data
+          ])
+        }else{
+          alert('This character already exists!')
         }
       }
-    );
+
+    } catch (error) {
+      alert("There's no characters with that ID!")
+    }
   };
 
   const onClose = (id) => {
@@ -70,8 +76,10 @@ export default function App() {
   };
 
   const charactersWithFavorites = characters.map((character) => {
-    const isFavorite = favorites.some((favorite) => favorite.id === character.id);
-  
+    const isFavorite = favorites.some(
+      (favorite) => favorite.id === character.id
+    );
+
     return {
       ...character,
       isFavorite,
@@ -80,13 +88,17 @@ export default function App() {
 
   return (
     <div className="App">
-      {location.pathname !== "/" ? <Nav onSearch={onSearch} logout={logout}/> : null}
+      {location.pathname !== "/" ? (
+        <Nav onSearch={onSearch} logout={logout} />
+      ) : null}
 
       <Routes>
-        <Route path="/" element={<Form login={login}/>} />
+        <Route path="/" element={<Form login={login} />} />
         <Route
           path="/home"
-          element={<Cards characters={charactersWithFavorites} onClose={onClose} />}
+          element={
+            <Cards characters={charactersWithFavorites} onClose={onClose} />
+          }
         />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />

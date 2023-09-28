@@ -25,13 +25,13 @@ export default function SearchBar({ onSearch, logout }) {
           onSearch(id);
           setId("");
         }}
-        className="text-slate-200 pl-[10px] h-[100%] w-[100px] hover:bg-slate-700 active:bg-slate-600"
+        className="text-slate-200 pl-[10px] h-[98%] w-[100px] hover:bg-slate-700 active:bg-slate-600"
       >
         Agregar
       </button>
       <button
         onClick={()=>randomChar()}
-        className="text-slate-200 pl-[10px]  h-[100%] w-[200px] hover:bg-slate-700 active:bg-slate-600"
+        className="text-slate-200 pl-[10px]  h-[98%] w-[200px] hover:bg-slate-700 active:bg-slate-600"
       >
         Random character
       </button>

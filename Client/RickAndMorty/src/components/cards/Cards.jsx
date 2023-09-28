@@ -11,7 +11,6 @@ export default function Cards({ characters, onClose }) {
         {characters.map(
           ({ id, name, status, species, gender, origin, image}, index) => {
             return (
-              
                 <div className=" bg-gradient-to-r from-slate-800 to-gray-700 my-[70px] flex w-[70%] mx-auto justify-between rounded-[9px] shadow-2xl " key={index}>
                     <Card
                       id={id}
@@ -22,7 +21,6 @@ export default function Cards({ characters, onClose }) {
                       origin={origin.name}
                       image={image}
                       onClose={onClose}
-
                     />
                   </div>
             );

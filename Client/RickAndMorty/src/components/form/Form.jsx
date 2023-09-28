@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import styles from "./form.css";
 import { useState } from "react";
 import { validation } from "./validation";
 
@@ -34,7 +33,7 @@ export const Form = ({login}) => {
 
   return (
     <div className=" bg-gradient-to-b from-slate-500 to-slate-700 h-[100vh] flex justify-center items-center">
-    <form onSubmit={handleSubmit} className="bg-slate-200 h-[500px] w-[27%] rounded-[10px] shadow-2xl flex flex-col justify-center text-center">
+    <form onSubmit={handleSubmit} className=" bg-slate-200 shadow-2xl h-[550px] w-[27%] rounded-[5px] flex flex-col justify-center text-center">
       <img src={"https://www.freepnglogos.com/uploads/rick-and-morty-png/rick-and-morty-portal-shoes-white-clothing-zavvi-23.png"} className="h-[250px] w-[250px] self-center" />
       <label className="text-slate-900 font-poppins pb-[10px] text-lg">Email</label>
       <input

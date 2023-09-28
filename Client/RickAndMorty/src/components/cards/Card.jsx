@@ -31,7 +31,7 @@ function Card({
       removeFav(id)
     } else {
       setIsFav(true);
-      addFav({id, name, status, species, gender, origin, image, onClose})
+      addFav({id, name, status, species, gender, origin, image})
     }
   };
 
@@ -49,17 +49,17 @@ function Card({
     <div className="w-[100%] h-[100%]">
           {
           isFav ?
-            <button onClick={handleFavorite} className="float-left relative z-10 mt-[5px] hover:scale-110">❤️</button>
+            <button onClick={handleFavorite} className="float-left relative left-[8px] top-[8px] z-10 mt-[5px] hover:scale-110">❤️</button>
           :
-            <button onClick={handleFavorite} className="float-left relative z-10 mt-[5px] hover:scale-110">🤍</button>
+            <button onClick={handleFavorite} className="float-left relative left-[8px] top-[8px] z-10 mt-[5px] hover:scale-110">🤍</button>
           }
           <button
             onClick={() => {onClose(id); removeFav(id)}}
             className=" float-right relative right-[8px] top-[3px] text-[20px] text-slate-200 hover:scale-110"
           >X</button>
-            <h2 className="inline relative top-[125px] left-[150px] font-bold text-[30px] text-slate-300 overflow-hidden text-ellipsis" >{name}</h2>
+            <h2 className="inline relative top-[125px] left-[210px] font-bold text-[30px] text-slate-300 overflow-hidden text-ellipsis" >{name}</h2>
           <Link to={`/detail/${id}`} className="relative">
-            <button className="relative float-right top-[240px] right-[40px] bg-slate-500 w-[150px] h-[40px] rounded-[5px] font-semibold text-slate-200 hover:border-[3px] hover:border-slate-200 hover:bg-slate-800">Details</button>
+            <button className="relative float-right top-[240px] right-[40px] bg-slate-500 w-[150px] h-[40px] rounded-[5px] font-semibold text-slate-200 hover:border-[3px] hover:border-slate-200 hover:bg-slate-800 active:bg-slate-500">Details</button>
           </Link>
           <img src={image} className="h-[100%] mt-[-36px] relative right-[22px] rounded-l-[9px]" />
           </div>
