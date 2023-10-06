@@ -5,6 +5,7 @@ import Card from "../cards/Card";
 import { useDispatch } from "react-redux";
 import { filterCards, orderCards } from "../../redux/actions";
 import { useState } from "react";
+import styles from './favorites.css'
 
 function Favorites() {
   const allFavs = useSelector((state) => state.allCharacters);
@@ -12,8 +13,6 @@ function Favorites() {
   const favorites = useSelector((state) => state.myFavorites);
 
   const [aux, setAux] = useState(false);
-
-  const [currentfilter, setCurrentFilter] = useState("ALL");
 
   const dispatch = useDispatch();
 
@@ -34,18 +33,18 @@ function Favorites() {
   };
 
   return (
-    <div className="">
-      <div className="flex flex-row w-[200px] mt-[70px] mx-auto">
-        <select className="mr-[50px] rounded-[2px] bg-slate-100" onChange={handleOrder}>
-          <option value="A" className="bg-slate-100 ">
+    <div className="flex flex-row flex-wrap mx-[4px] gap-[20px] mt-[150px]">
+      <div className="absolute top-[70px] right-[570px] rounded-sm">
+        <select className="h-[40px]" onChange={handleOrder}>
+          <option value="A" className="">
             Ascendente
           </option>
-          <option value="D" className="bg-slate-100">
+          <option value="D" className="">
             Descendente
           </option>
         </select>
 
-        <select onChange={handleFilter} className="h-[50px] rounded-[2px] bg-slate-100">
+        <select onChange={handleFilter} className="h-[40px] ml-[10px] rounded-sm">
           <option value="ALL" className="bg-slate-100">
             All characters
           </option>
@@ -68,7 +67,7 @@ function Favorites() {
         ? favorites.map(
             ({ id, name, status, species, gender, origin, image }) => {
               return (
-                <div className=" bg-gradient-to-r from-slate-800 to-gray-700 my-[50px] flex w-[70%] mx-auto justify-between rounded-[9px] shadow-2xl transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110  duration-300">
+                <div className=" ">
                   <Card
                     id={id}
                     key={id}
@@ -86,7 +85,7 @@ function Favorites() {
         : allFavs.map(
             ({ id, name, status, species, gender, origin, image }) => {
               return (
-                <div className=" bg-gradient-to-r from-slate-800 to-gray-700 my-[50px] flex w-[70%] mx-auto justify-between rounded-[9px] shadow-2xl transition ease-in-out delay-100  hover:-translate-y-1 hover:scale-110  duration-300">
+                <div className=" ">
                   <Card
                     id={id}
                     key={id}

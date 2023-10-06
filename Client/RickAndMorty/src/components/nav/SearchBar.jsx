@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
-export default function SearchBar({ onSearch, logout }) {
+export default function SearchBar({ onSearch }) {
   const [id, setId] = useState("");
 
-  const randomChar = ()=> {onSearch(Math.floor(Math.random() * 825)); setId('')}
+  const randomChar = ()=> {onSearch(Math.floor(Math.random() * 826 )+ 1)}
 
   const handleChange = ({ target }) => {
     setId(target.value);

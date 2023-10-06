@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./card.css";
 import { Link } from "react-router-dom";
 import { addFav, removeFav } from "../../redux/actions";
-import  { connect }  from "react-redux";
+import { connect } from "react-redux";
 
 function Card({
   id,
@@ -20,68 +20,99 @@ function Card({
   onClose,
   removeFav,
   addFav,
-  allCharacters
+  allCharacters,
 }) {
-  
   const [isFav, setIsFav] = useState(false);
 
   const handleFavorite = () => {
     if (isFav) {
       setIsFav(false);
-      removeFav(id)
+      removeFav(id);
     } else {
       setIsFav(true);
-      addFav({id, name, status, species, gender, origin, image})
+      addFav({ id, name, status, species, gender, origin, image });
     }
   };
 
   useEffect(() => {
-    allCharacters.forEach((fav) => {
-       if (fav.id === id) {
-          setIsFav(true);
-       }
+    allCharacters.forEach((char) => {
+      if (char.id === id) {
+        setIsFav(true);
+      }
     });
- }, [allCharacters]);
- 
+  }, [allCharacters]);
 
   return (
     <>
-    <div className="w-[100%] h-[100%]">
-          {
-          isFav ?
-            <button onClick={handleFavorite} className="float-left relative left-[8px] top-[8px] z-10 mt-[5px] hover:scale-110">❤️</button>
-          :
-            <button onClick={handleFavorite} className="float-left relative left-[8px] top-[8px] z-10 mt-[5px] hover:scale-110">🤍</button>
-          }
-          <button
-            onClick={() => {onClose(id); removeFav(id)}}
-            className=" float-right relative right-[8px] top-[3px] text-[20px] text-slate-200 hover:scale-110"
-          >X</button>
-            <h2 className="inline relative top-[125px] left-[210px] font-bold text-[30px] text-slate-300 overflow-hidden text-ellipsis" >{name}</h2>
-          <Link to={`/detail/${id}`} className="relative">
-            <button className="relative float-right top-[240px] right-[40px] bg-slate-500 w-[150px] h-[40px] rounded-[5px] font-semibold text-slate-200 hover:border-[3px] hover:border-slate-200 hover:bg-slate-800 active:bg-slate-500">Details</button>
-          </Link>
-          <img src={image} className="h-[100%] mt-[-36px] relative right-[22px] rounded-l-[9px]" />
+      <div class="group before:hover:scale-95 before:hover:h-72 before:hover:w-80  before:hover:rounded-b-2xl before:transition-all before:duration-500 before:content-[''] before:w-80 before:h-24 before:rounded-t-2xl before:bg-gradient-to-bl from-sky-300 via-slate-400 to-slate-500 before:absolute before:top-0 w-80 h-72 relative bg-slate-50 flex flex-col items-center justify-center gap-2 text-center rounded-2xl overflow-hidden">
+        <div class="w-28 h-28  mt-8 rounded-full border-4 border-slate-50 z-10 group-hover:scale-150 group-hover:-translate-x-24  group-hover:-translate-y-20 transition-all duration-500">
+          <img src={image} alt={name} className=" rounded-full" />
+        </div>
+        <div class="z-10  group-hover:-translate-y-10 transition-all duration-500">
+          <span class="text-2xl font-semibold">{name}</span>
+          <p>{status}</p>
+        </div>
+        <button
+          className="btn-close absolute right-[18px] top-[17px]"
+          onClick={() => {
+            onClose(id);
+            removeFav(id);
+          }}
+        >
+          <span class="back"></span>
+          <span class="front"></span>X
+        </button>
+        {isFav ? (
+          <div className="z-10">
+            <button
+              className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md z-10 hover:scale-125 transition-all duration-500 hover:bg-blue-500"
+              href="#"
+              onClick={handleFavorite}
+            >
+            X  Favorites
+            </button>
+            <Link to={`/detail/${id}`}>
+              <button className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md  hover:scale-125 transition-all duration-500 hover:bg-blue-500 ml-[15px]">
+                Details
+              </button>
+            </Link>
           </div>
+        ) : (
+          <div className="z-10">
+            <button
+              className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md  hover:scale-125 transition-all duration-500 hover:bg-blue-500"
+              href="#"
+              onClick={handleFavorite}
+            >
+              Favorites
+            </button>
+            <Link to={`/detail/${id}`}>
+              <button className="bg-blue-700 px-4 py-1 text-slate-50 rounded-md  hover:scale-125 transition-all duration-500 hover:bg-blue-500 ml-[15px]">
+                Details
+              </button>
+            </Link>
+          </div>
+        )}
+      </div>
     </>
   );
 }
 
-const mapDispatchToProps= (dispatch)=>{
-  return{
-  removeFav: (id)=>{
-    dispatch(removeFav(id))
-  },
-  addFav: (character)=>{
-    dispatch(addFav(character))
-  }
- }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeFav: (id) => {
+      dispatch(removeFav(id));
+    },
+    addFav: (character) => {
+      dispatch(addFav(character));
+    },
+  };
+};
 
-const mapStateToProps = (state)=>{
-    return{
-      allCharacters: state.allCharacters
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    allCharacters: state.allCharacters,
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);

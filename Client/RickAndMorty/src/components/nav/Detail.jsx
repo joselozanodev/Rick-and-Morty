@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import styles from "./detail.css";
 
 export const Detail = () => {
   const { id } = useParams();
@@ -23,20 +24,30 @@ export const Detail = () => {
   }, [id]);
 
   return (
-   <>
-   {character ? 
-   <div className=" flex h-[100%] w-[100%] justify-between flex-row-reverse">
-      <div className="h-[100%] flex flex-col relative right-[350px] font-poppins">
-       <h2 className="inline relative text-black  top-[130px] right-[-150px] my-[25px] text-[30px]  transition ease-in-out delay-0  hover:-translate-y-1 hover:scale-110  duration-300"><span className="font-semibold">Name:</span> {character.name}</h2>
-       <h2 className="inline relative text-black top-[130px] my-[25px] right-[-150px] text-[30px]  transition ease-in-out delay-0  hover:-translate-y-1 hover:scale-110  duration-300"><span className="font-semibold">Status:</span> {character.status}</h2>
-       <h2 className="inline relative text-black top-[130px] my-[25px]  right-[-150px] text-[30px]  transition ease-in-out delay-0  hover:-translate-y-1 hover:scale-110  duration-300"><span className="font-semibold">Species:</span> {character.species}</h2>
-       <h2 className="inline relative text-black top-[130px] my-[25px]  right-[-150px] text-[30px]  transition ease-in-out delay-0  hover:-translate-y-1 hover:scale-110  duration-300"><span className="font-semibold">Gender:</span> {character.gender}</h2>     
-       <h2 className="inline relative text-black top-[130px] my-[25px]  right-[-150px] text-[30px] transition ease-in-out delay-0  hover:-translate-y-1 hover:scale-110  duration-300"><span className="font-semibold">Origin:</span> {character.origin ? character.origin.name : null}</h2>
-       </div>
-       <div className="relative left-[30px] border-r-[5px] border-slate-800 w-[500px] h-[100vh] ml-[-30px] backdrop-blur-xl bg-black/30 ">
-       <img src={character.image} alt={character.name} className="rounded-[50%] relative top-[170px] left-[90px] transition ease-in-out delay-0  hover:-translate-y-1 hover:scale-110  duration-300"/>
-       </div>
-   </div> :null} 
-</>
+    <>
+      {character ? (
+        <div className="w-[350px] card mx-auto relative top-[150px]">
+          <div className="card-front">
+            <img src={character.image} alt={character.name} className="card-image " />
+          </div>
+          <div className=" card-back">
+            <div className="card-info">
+              <h2 className="card-info-text">Name: {character.name}</h2>
+              <hr />
+              <h2 className="card-info-text">Status: {character.status}</h2>
+              <hr />
+              <h2 className="card-info-text">Species: {character.species}</h2>
+              <hr />
+              <h2 className="card-info-text">Gender: {character.gender}</h2>
+              <hr />
+              <h2 className="card-info-text">
+                Origin:{character.origin ? character.origin.name : null}
+              </h2>
+            </div>
+            <div className=""></div>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 };

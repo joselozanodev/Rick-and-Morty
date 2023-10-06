@@ -8,25 +8,24 @@ import Card from "./Card";
 export default function Cards({ characters, onClose }) {
   return (
     <>
+    <div className="flex flex-wrap flex-row gap-[20px] mt-[80px] ml-[4px]">
         {characters.map(
           ({ id, name, status, species, gender, origin, image}, index) => {
             return (
-                <div className=" bg-gradient-to-r from-slate-800 to-gray-700 my-[70px] flex w-[70%] mx-auto justify-between rounded-[9px] shadow-2xl " key={index}>
-                    <Card
-                      id={id}
-                      name={name}
-                      status={status}
-                      species={species}
-                      gender={gender}
-                      origin={origin.name}
-                      image={image}
-                      onClose={onClose}
-                    />
-                  </div>
+                <Card
+                  id={id}
+                  name={name}
+                  status={status}
+                  species={species}
+                  gender={gender}
+                  origin={origin.name}
+                  image={image}
+                  onClose={onClose}
+                />
             );
           }
         )}
-
+</div>
     </>
   );
 }

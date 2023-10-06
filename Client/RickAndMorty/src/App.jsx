@@ -35,7 +35,6 @@ export default function App() {
       const { access } = data;
       setAccess(access);
       access && navigate("/home");
-
     } catch (error) {
       console.log(error.message);
     }
@@ -43,7 +42,6 @@ export default function App() {
 
   function logout() {
     setAccess(false);
-    navigate("/");
   }
 
   useEffect(() => {
